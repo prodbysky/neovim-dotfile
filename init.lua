@@ -1,7 +1,17 @@
 vim.pack.add({
-    {src = "https://github.com/kepano/flexoki-neovim"}
+    {src = "https://github.com/blazkowolf/gruber-darker.nvim"},
+    {src = "https://github.com/nvim-lualine/lualine.nvim"},
+    {src = "https://github.com/stevearc/oil.nvim"},
+    {src = "https://github.com/ej-shafran/compile-mode.nvim"},
+    {src = "https://github.com/nvim-lua/plenary.nvim"},
+    {src = "https://github.com/mason-org/mason.nvim"},
+    {src = "https://github.com/chikko80/error-lens.nvim"},
+    {src = "https://github.com/hrsh7th/nvim-cmp"},
+    {src = "https://github.com/hrsh7th/cmp-nvim-lsp"},
+    {src = "https://github.com/nvim-treesitter/nvim-treesitter"},
+    {src = "https://github.com/Airbus5717/c3.vim"}
 })
-vim.cmd [[color flexoki]]
+vim.cmd [[color gruber-darker]]
 vim.g.mapleader = " "
 
 vim.api.nvim_set_option("clipboard", "unnamed")
@@ -16,22 +26,12 @@ vim.o.scrolloff = 8
 
 vim.opt.fillchars = {eob = ' '}
 
-vim.pack.add({
-    {src = "https://github.com/nvim-lualine/lualine.nvim"}
-})
 require('lualine').setup()
 
-vim.pack.add({
-    {src = "https://github.com/stevearc/oil.nvim"}
-})
 require("oil").setup()
 vim.keymap.set("n", "<Leader>k", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 
-vim.pack.add({
-    {src = "https://github.com/ej-shafran/compile-mode.nvim"},
-    {src = "https://github.com/nvim-lua/plenary.nvim"}
-})
 vim.g.compile_mode = {}
 local last_compile_command = nil
 
@@ -59,12 +59,6 @@ end
 
 vim.api.nvim_set_keymap('n', '<leader>c', ':lua CompileCommand()<CR>', { noremap = true, silent = true })
 
-vim.pack.add({
-    {src = "https://github.com/mason-org/mason.nvim"},
-    {src = "https://github.com/chikko80/error-lens.nvim"},
-  { src = "https://github.com/hrsh7th/nvim-cmp" },
-  { src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
-})
 require("mason").setup()
 
 local lsp_configs = {}
@@ -101,12 +95,10 @@ vim.lsp.config("clangd", {
 vim.lsp.config("c3_lsp", {
   capabilities = capabilities,
 })
+vim.lsp.config("rust-analyzer", {
+  capabilities = capabilities,
+})
 
 vim.lsp.enable(lsp_configs)
 require("error-lens").setup(client, {})
 
-
-vim.pack.add({
-    {src = "https://github.com/nvim-treesitter/nvim-treesitter"},
-    {src = "https://github.com/Airbus5717/c3.vim"}
-})
